@@ -31,4 +31,19 @@ class GameController{
 
         return (new \App\View('game/create', ['result' => $result]))->render();
     }
+
+    public function store(): string
+    {
+        $gameManager = new Game();
+
+        $game_form = [
+            'title' => htmlspecialchars(trim($_POST['title'])),
+            'min_players' => htmlspecialchars(trim($_POST['min_players'])),
+            'max_players' => htmlspecialchars(trim($_POST['max_players'])),
+        ];
+
+        $result = $gameManager->createGame(...$game_form);
+
+        return (new \App\View('game/store', ['result' => $result]))->render();
+    }
 }

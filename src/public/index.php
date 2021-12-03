@@ -18,13 +18,16 @@ try {
     $router->get('/', function () { echo 'Hello World !';});
 
     $router->get('/contest', [App\Controllers\ContestController::class, 'contest']);
-    $router->post('/contest/create', [App\Controllers\ContestController::class, 'create']);
+    $router->get('/contest/create', [App\Controllers\ContestController::class, 'create']);
+    $router->post('/contest/store', [App\Controllers\ContestController::class, 'store']);
 
     $router->get('/game', [App\Controllers\GameController::class, 'game']);
-    $router->post('/game/create', [App\Controllers\GameController::class, 'create']);
+    $router->get('/game/create', [App\Controllers\GameController::class, 'create']);
+    $router->post('/game/store', [App\Controllers\GameController::class, 'store']);
 
     $router->get('/player', [App\Controllers\PlayerController::class, 'player']);
-    $router->post('/player/create', [App\Controllers\PlayerController::class, 'create']);
+    $router->get('/player/create', [App\Controllers\PlayerController::class, 'create']);
+    $router->post('/player/store', [App\Controllers\PlayerController::class, 'store']);
 
 
 

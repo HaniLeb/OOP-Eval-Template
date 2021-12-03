@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Models\Contest;
+use App\Models\Game;
 
 class ContestController{
 
@@ -19,16 +20,24 @@ class ContestController{
     
     public function create(): string
     {
+        $gameManager = new Game();
+
+        $games = $gameManager->getGames();
+
+        return (new \App\View('contest/create', ['games' => $games]))->render();
+    }
+    
+    public function store()
+    {
         $contestManager = new Contest();
-
+        
         $contest_form = [
-            'start_date' => htmlspecialchars(trim($_POST['start_date'])),
-            'winner_id' => htmlspecialchars(trim($_POST['winner_id'])),
-            'game_id' => htmlspecialchars(trim($_POST['game_id'])),
+            'start_date' => $_POST['start_date'],
+            'game_id' => intval($_POST['game_id']),
         ];
-
+        
         $result = $contestManager->createContest(...$contest_form);
-
-        return (new \App\View('contest/create', ['result' => $result]))->render();
+        
+        return (new \App\View('contest/store', ['result' => $result]))->render();
     }
 }

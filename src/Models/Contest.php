@@ -9,7 +9,7 @@ use App\DB;
 class Contest
 {
     protected int $id;
-    protected string $start_date;
+    protected $start_date;
     protected int $winner;
     protected int $game;
 
@@ -103,15 +103,14 @@ class Contest
          }
      }
 
-     public function createContest($start_date, int $winner_id, int $game_id)
+     public function createContest($start_date, int $game_id)
      {
          try {
             $db = (new DB())->getStaticPdo();
-    
-            $sql = 'INSERT INTO contest (start_date, winner_id, game_id) VALUES (:start_date, :winner_id, :game_id)';
+
+            $sql = 'INSERT INTO contest (start_date, game_id) VALUES (:start_date, :game_id)';
             $req = $db->prepare($sql);
             $req->bindValue(':start_date', $start_date);
-            $req->bindValue(':winner_id', $winner_id, \PDO::PARAM_INT);
             $req->bindValue(':game_id', $game_id, \PDO::PARAM_INT);
     
             return $req->execute();

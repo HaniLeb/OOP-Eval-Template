@@ -1,12 +1,16 @@
-<form action="/contest/create" method="POST">
+<form action="/contest/store" method="POST">
+
 <label for="start_date">Start Date</label>
 <input type="date" name="start_date" id="start_date" require>
 
 <label for="game_id">Game N°</label>
-<input type="number" name="game_id" id="game_id" require>
+<select name="game_id" id="game_id">
 
-<label for="winner">Winner</label>
-<input type="number" name="winner" id="winner" require>
+<?php foreach($this->games as $game): ?>
+<option value="<?php echo $game->getId(); ?>"><?php echo $game->getTitle(); ?></option>
+<?php endforeach; ?>
+
+</select>
 
 <button type="submit">Ajouter</button>
 </form>
