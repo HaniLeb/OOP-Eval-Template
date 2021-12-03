@@ -1,4 +1,4 @@
-<form action="/game/create" method="POST">
+<form action="/game/store" method="POST">
 <label for="title">Title</label>
 <input type="text" name="title" id="title" require>
 
